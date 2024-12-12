@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}FlaskApp Homepage{% endblock %}
+
+{% block context %}
+    <h1>
+        MAIN Heading of flaskAPP
+    </h1>
+    <ul>
+        {% for x in lis %}
+            {% if x == 10 or x == 30 or x == 50 or x == 70 %}
+                <li style="color: red">{{x}}</li>
+            {%else%}
+                <li style="color: blue">{{x}}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('filters') }}">Link_for_filters_page</a>
+{% endblock %}

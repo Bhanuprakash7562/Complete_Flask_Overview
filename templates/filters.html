@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}FlaskApp Filters{% endblock %}
+
+{% block context %}
+    <p>{{txt|upper}}</p>
+    <p>{{txt|lower}}</p>
+    <p>{{txt|replace('l', 'L')}}</p>
+    <p>{{txt|title}}</p>
+    <p>{{txt|reverse_str}}</p>
+{% endblock %}

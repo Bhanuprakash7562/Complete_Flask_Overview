@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Professional Portfolio</title>
+    <style>
+        /* Modern and clean styling */
+        :root {
+            --primary-color: #625750;
+            --secondary-color: #e0e2e4;
+            --text-color: #4f3222;
+            --background-color: #96897f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: #ffe2d3;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        section {
+            background: #c6bcb6;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: #4f3222;
+            text-decoration:wavy;
+            cursor: pointer;
+        }
+
+        .skills-grid {
+            display:contents;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap:initial;
+            margin-top: 1rem;
+        }
+
+        .skill-item {
+            background: var(--background-color);
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="{{ url_for('static', filename='bhanu_prakash.jpg') }}" alt="Profile Picture" class="profile-img">
+            <h1>{{ name }}</h1>
+            <p>{{ title }}</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section id="about">
+            <h2>About Me</h2>
+            <p>{{ about }}</p>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                {% for skill in skills %}
+                <div class="skill-item">{{ skill }}</div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Professional Experience</h2>
+            {% for job in experience %}
+            <div class="experience-item">
+                <h3>{{ job.title }}</h3>
+                <p><a href="https://stellaripl.com/"><b>{{ job.company }}</b></a> | {{ job.period }}</p>
+                <p>{{ job.description }}</p>
+                
+            </div>
+            {% endfor %}
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            {% for edu in education %}
+            <div class="education-item">
+                <h3>{{ edu.degree }}</h3>
+                <p><strong>{{ edu.institution }}</strong> | {{ edu.period }}</p>
+                <p>{{ edu.description }}</p>
+            </div>
+            {% endfor %}
+        </section>
+
+        <section id="contact">
+            <h2>Contact Information</h2>
+            <div class="contact-info">
+                <p>📧 {{ email }}</p>
+                <p>📱 {{ phone }}</p>
+                <p>📍 {{ location }}</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
